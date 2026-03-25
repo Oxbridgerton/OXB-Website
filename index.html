@@ -36,8 +36,24 @@
     overflow-x: hidden;
   }
 
-  .page { display: none; }
+  .page { display: none; position: relative; }
   .page.active { display: block; }
+
+  .corner-tl, .corner-tr {
+    position: absolute;
+    top: 0;
+    width: 350px;
+    height: 350px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.75;
+  }
+  .corner-tl { left: 0; }
+  .corner-tr { right: 0; transform: scaleX(-1); }
+
+  @media (max-width: 768px) {
+    .corner-tl, .corner-tr { width: 180px; height: 180px; }
+  }
 
   .site-nav {
     padding: 1.4rem 3rem;
@@ -45,6 +61,8 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
   }
 
   .nav-logo {
@@ -82,6 +100,8 @@
     text-align: center;
     padding: 3rem 2rem;
     background: var(--navy);
+    position: relative;
+    z-index: 1;
   }
 
   .home-logo {
@@ -423,6 +443,7 @@
 
 <!-- HOME -->
 <div class="page active" id="pageHome">
+  <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <div class="home">
     <h1 class="home-logo">OXBRIDGERTON</h1>
     <p class="home-tagline">"Like Raya for Intellectuals"</p>
@@ -440,6 +461,7 @@
 
 <!-- APPLY -->
 <div class="page" id="pageApply">
+  <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Oxbridgerton</div><button class="nav-back" onclick="showPage('pageHome')">Back</button></nav>
   <div class="page-header"><h2 class="page-title">Request Membership</h2></div>
   <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
@@ -463,6 +485,7 @@
 
 <!-- NOMINATE -->
 <div class="page" id="pageNominate">
+  <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Oxbridgerton</div><button class="nav-back" onclick="showPage('pageHome')">Back</button></nav>
   <div class="page-header"><h2 class="page-title">Nominate for Membership</h2><p class="page-subtitle">Know someone exceptional? Put them forward. Your nomination carries weight — we trust our community to recognise their own.</p></div>
   <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
@@ -483,6 +506,7 @@
 
 <!-- EVENTS -->
 <div class="page" id="pageEvents">
+  <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Oxbridgerton</div><button class="nav-back" onclick="showPage('pageHome')">Back</button></nav>
   <div class="page-header"><h2 class="page-title">The Calendar</h2><p class="page-subtitle">Real experiences with remarkable people.</p></div>
   <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
@@ -499,6 +523,7 @@
 
 <!-- APPLICATION CONFIRMED -->
 <div class="page" id="pageApplyConfirm">
+  <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Oxbridgerton</div></nav>
   <div class="confirmation-content">
     <div class="conf-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 2L28 9V16L22 23L16 16V9L22 2Z" stroke="#B89B5E" stroke-width="0.5" fill="none"/><line x1="22" y1="23" x2="22" y2="35" stroke="#B89B5E" stroke-width="0.5"/><path d="M16 30Q22 26 28 30" stroke="#B89B5E" stroke-width="0.5" fill="none"/></svg></div>
@@ -510,6 +535,7 @@
 
 <!-- NOMINATION CONFIRMED -->
 <div class="page" id="pageNomConfirm">
+  <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Oxbridgerton</div></nav>
   <div class="confirmation-content">
     <div class="conf-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 2L28 9V16L22 23L16 16V9L22 2Z" stroke="#B89B5E" stroke-width="0.5" fill="none"/><line x1="22" y1="23" x2="22" y2="35" stroke="#B89B5E" stroke-width="0.5"/><path d="M16 30Q22 26 28 30" stroke="#B89B5E" stroke-width="0.5" fill="none"/></svg></div>
