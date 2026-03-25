@@ -286,7 +286,8 @@
     font-weight: 400;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #D8D4CA;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
   }
 
   .form-input, .form-select, .form-textarea {
@@ -374,6 +375,60 @@
   .form-section-label { font-family: 'Libre Franklin', sans-serif; font-size: 0.58rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dim); text-align: center; margin-bottom: 1.8rem; }
   .form-divider { height: 1px; background: var(--border); margin: 2rem 0; }
 
+  /* Consent checkbox */
+  .consent-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+
+  .consent-group input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border: 1px solid var(--border-hover);
+    background: none;
+    cursor: pointer;
+    margin-top: 2px;
+    position: relative;
+  }
+
+  .consent-group input[type="checkbox"]:checked {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .consent-group input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid var(--navy);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .consent-label {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: var(--muted-light);
+    line-height: 1.6;
+  }
+
+  .consent-label a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .consent-label a:hover { color: var(--gold-light); }
+
   .confirmation-content { text-align: center; padding: 8rem 2rem; max-width: 500px; margin: 0 auto; }
   .conf-icon { width: 44px; height: 44px; margin: 0 auto 2rem; }
   .conf-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--gold); margin-bottom: 1.2rem; }
@@ -418,9 +473,51 @@
 
   .site-footer { padding: 2.5rem 2rem; text-align: center; border-top: 1px solid var(--border); }
   .footer-text { font-family: 'Libre Franklin', sans-serif; font-size: 0.55rem; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(124, 133, 148, 0.3); }
+  .footer-link { color: rgba(124, 133, 148, 0.3); text-decoration: none; transition: color 0.2s; cursor: pointer; }
+  .footer-link:hover { color: var(--gold); }
 
   .status-msg { font-family: 'Libre Franklin', sans-serif; font-size: 0.75rem; font-weight: 300; text-align: center; padding: 0.6rem; margin-top: 1rem; display: none; }
   .status-msg.error { display: block; color: #D4756A; }
+
+  /* Privacy policy page */
+  .policy-content {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .policy-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--gold);
+    margin-top: 2.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .policy-content p {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 0.8rem;
+  }
+
+  .policy-content ul {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 0.8rem;
+    padding-left: 1.2rem;
+  }
+
+  .policy-content li { margin-bottom: 0.3rem; }
+
+  .policy-content a { color: var(--gold); text-decoration: none; }
+  .policy-content a:hover { color: var(--gold-light); }
 
   @media (max-width: 768px) {
     .site-nav { padding: 1rem 1.5rem; }
@@ -474,10 +571,16 @@
     <div class="form-group"><label class="form-label">Referral Code</label><input type="text" class="form-input" id="applyReferral" placeholder="If you were referred by a member"></div>
     <div class="form-group"><label class="form-label">What is your proudest achievement, or the most interesting thing about you?</label><textarea class="form-textarea" id="applyAchievement" placeholder="—"></textarea></div>
     <div class="form-group"><label class="form-label">Photos (2–5 images)</label><p class="form-hint" style="margin-top:0;margin-bottom:0.7rem;">Upload 2 to 5 photos that capture your lifestyle, personality, and achievements.</p><div class="upload-area" id="applyUploadArea"><input type="file" id="applyPhotoInput" accept="image/*" multiple style="display:none"><p class="upload-main-text">Click to upload or drag photos here</p><p class="upload-sub-text">JPG or PNG · Max 5 photos</p></div><div class="photo-preview" id="applyPhotoPreview"></div><p class="form-hint" id="applyPhotoCount" style="display:none"></p></div>
+
+    <div class="consent-group">
+      <input type="checkbox" id="applyConsent">
+      <label class="consent-label" for="applyConsent">I agree to the <a onclick="showPage('pagePrivacy')">Privacy Policy</a> and consent to my personal data being processed for the purpose of membership consideration.</label>
+    </div>
+
     <button type="button" class="form-submit" id="applySubmitBtn" onclick="submitApply()">Submit Application</button>
     <div class="status-msg" id="applyStatus"></div>
   </div>
-  <div class="site-footer"><span class="footer-text">Oxbridgerton · London · Est. 2026</span></div>
+  <div class="site-footer"><span class="footer-text">Oxbridgerton · London · Est. 2026 · <a class="footer-link" onclick="showPage('pagePrivacy')">Privacy Policy</a></span></div>
 </div>
 
 <!-- NOMINATE -->
@@ -495,10 +598,16 @@
     <div class="form-group"><label class="form-label">Nominee's University</label><select class="form-select" id="nomUni"><option value="" disabled selected>Select university</option><optgroup label="United Kingdom"><option value="oxford">University of Oxford</option><option value="cambridge">University of Cambridge</option></optgroup><optgroup label="United States"><option value="harvard">Harvard University</option><option value="yale">Yale University</option><option value="princeton">Princeton University</option><option value="columbia">Columbia University</option><option value="penn">University of Pennsylvania</option><option value="brown">Brown University</option><option value="dartmouth">Dartmouth College</option><option value="cornell">Cornell University</option><option value="mit">MIT</option><option value="stanford">Stanford University</option></optgroup><option value="other">Other</option></select></div>
     <div class="form-group"><label class="form-label">Why are you nominating them?</label><textarea class="form-textarea" id="nomWhy" placeholder="What makes them an exceptional candidate?"></textarea></div>
     <div class="form-group"><label class="form-label">Photos of Nominee (1–3 images)</label><p class="form-hint" style="margin-top:0;margin-bottom:0.7rem;">Upload photos that give us a sense of who they are.</p><div class="upload-area" id="nomUploadArea"><input type="file" id="nomPhotoInput" accept="image/*" multiple style="display:none"><p class="upload-main-text">Click to upload photos</p><p class="upload-sub-text">JPG or PNG · Max 3 photos</p></div><div class="photo-preview" id="nomPhotoPreview"></div><p class="form-hint" id="nomPhotoCount" style="display:none"></p></div>
+
+    <div class="consent-group">
+      <input type="checkbox" id="nomConsent">
+      <label class="consent-label" for="nomConsent">I agree to the <a onclick="showPage('pagePrivacy')">Privacy Policy</a> and confirm I have the nominee's permission to share their personal data for the purpose of membership consideration.</label>
+    </div>
+
     <button type="button" class="form-submit" id="nomSubmitBtn" onclick="submitNomination()">Submit Nomination</button>
     <div class="status-msg" id="nomStatus"></div>
   </div>
-  <div class="site-footer"><span class="footer-text">Oxbridgerton · London · Est. 2026</span></div>
+  <div class="site-footer"><span class="footer-text">Oxbridgerton · London · Est. 2026 · <a class="footer-link" onclick="showPage('pagePrivacy')">Privacy Policy</a></span></div>
 </div>
 
 <!-- EVENTS -->
@@ -515,7 +624,7 @@
     <div class="event-card"><h3>Supper Clubs</h3><p>Twelve strangers, one long table, concept menus. Curated seating designed to introduce you to someone remarkable. No phones, no pretence.</p><span class="event-freq">Monthly</span></div>
     <div class="event-card"><h3>The Oxbridgerton Ball</h3><p>The flagship. A black-tie evening in an extraordinary setting. Ballroom dancing, perfect strangers.</p><span class="event-freq">Annual</span></div>
   </div>
-  <div class="site-footer"><span class="footer-text">Oxbridgerton · London · Est. 2026</span></div>
+  <div class="site-footer"><span class="footer-text">Oxbridgerton · London · Est. 2026 · <a class="footer-link" onclick="showPage('pagePrivacy')">Privacy Policy</a></span></div>
 </div>
 
 <!-- APPLICATION CONFIRMED -->
@@ -540,6 +649,68 @@
     <p class="conf-text">Thank you for your nomination — nominations carry significant weight in our process. If successful, we'll reach out to your nominee with an invitation.</p>
     <button class="conf-home-btn" onclick="showPage('pageHome')">Return Home</button>
   </div>
+</div>
+
+<!-- PRIVACY POLICY -->
+<div class="page" id="pagePrivacy">
+  <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
+  <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Oxbridgerton</div><button class="nav-back" onclick="showPage('pageHome')">Back</button></nav>
+  <div class="page-header"><h2 class="page-title">Privacy Policy</h2><p class="page-subtitle">Last updated: March 2026</p></div>
+  <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+  <div class="policy-content">
+
+    <h3>Who We Are</h3>
+    <p>Oxbridgerton is a private members' society based in London. This policy explains how we collect, use, and protect your personal data in accordance with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.</p>
+
+    <h3>Data Controller</h3>
+    <p>Oxbridgerton is the data controller for the personal data we collect. For any data-related enquiries, please contact us at <a href="mailto:contact@oxbridgerton.com">contact@oxbridgerton.com</a>.</p>
+
+    <h3>What Data We Collect</h3>
+    <p>When you submit a membership application, we collect:</p>
+    <ul>
+      <li>Name, email address, and date of birth</li>
+      <li>Location</li>
+      <li>University, degree, and professional information</li>
+      <li>LinkedIn profile and Instagram handle (where provided)</li>
+      <li>Referral code (where provided)</li>
+      <li>Free-text responses about your achievements</li>
+      <li>Photographs you upload</li>
+    </ul>
+    <p>When you submit a nomination, we collect your name and email, along with the nominee's name, email, university, a description of why you are nominating them, and any photographs you upload.</p>
+
+    <h3>Why We Collect It</h3>
+    <p>We process your personal data for the purpose of assessing membership applications and managing our members' society. Our lawful basis for processing is consent, which you provide by ticking the consent checkbox on our application or nomination form.</p>
+
+    <h3>How We Store Your Data</h3>
+    <p>Your data is stored securely using Google Firebase (Firestore for text data and Firebase Storage for photographs). Firebase servers are operated by Google and data may be stored in the United States. Google operates under appropriate safeguards for international data transfers, including Standard Contractual Clauses.</p>
+
+    <h3>How Long We Keep Your Data</h3>
+    <p>If your application is successful, we retain your data for the duration of your membership. If your application is unsuccessful, we retain your data for up to 6 months following our decision, after which it is permanently deleted. Nomination data is retained for the same periods.</p>
+
+    <h3>Who We Share Your Data With</h3>
+    <p>We do not sell, rent, or share your personal data with any third parties for marketing purposes. Your data is accessible only to the Oxbridgerton membership committee for the purpose of assessing applications. Our data is hosted on Google Firebase infrastructure.</p>
+
+    <h3>Your Rights</h3>
+    <p>Under UK GDPR, you have the right to:</p>
+    <ul>
+      <li>Access the personal data we hold about you</li>
+      <li>Request correction of inaccurate data</li>
+      <li>Request deletion of your data</li>
+      <li>Withdraw your consent at any time</li>
+      <li>Request restriction of processing</li>
+      <li>Data portability — receive your data in a structured format</li>
+      <li>Lodge a complaint with the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank">ico.org.uk</a></li>
+    </ul>
+    <p>To exercise any of these rights, please contact <a href="mailto:contact@oxbridgerton.com">contact@oxbridgerton.com</a>. We will respond within 30 days.</p>
+
+    <h3>Cookies</h3>
+    <p>Our website does not use cookies for tracking or analytics purposes. Firebase may use strictly necessary cookies for service functionality.</p>
+
+    <h3>Changes to This Policy</h3>
+    <p>We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated date.</p>
+
+  </div>
+  <div class="site-footer"><span class="footer-text">Oxbridgerton · London · Est. 2026</span></div>
 </div>
 
 <!-- FIREBASE -->
@@ -588,7 +759,6 @@
 </script>
 
 <script>
-  /* Track current page for browser back button */
   var currentPage = 'pageHome';
 
   function showPage(id) {
@@ -596,25 +766,18 @@
     for (var i = 0; i < pages.length; i++) { pages[i].classList.remove('active'); }
     document.getElementById(id).classList.add('active');
     window.scrollTo(0, 0);
-
-    /* Push a history entry so browser back button works */
-    if (id !== currentPage) {
-      history.pushState({ page: id }, '');
-    }
+    if (id !== currentPage) { history.pushState({ page: id }, ''); }
     currentPage = id;
   }
 
-  /* When user presses browser back button */
   window.addEventListener('popstate', function(e) {
     if (e.state && e.state.page) {
-      /* Go to the page stored in history */
       var pages = document.querySelectorAll('.page');
       for (var i = 0; i < pages.length; i++) { pages[i].classList.remove('active'); }
       document.getElementById(e.state.page).classList.add('active');
       window.scrollTo(0, 0);
       currentPage = e.state.page;
     } else {
-      /* No state means we're back at the original entry - show home */
       var pages = document.querySelectorAll('.page');
       for (var i = 0; i < pages.length; i++) { pages[i].classList.remove('active'); }
       document.getElementById('pageHome').classList.add('active');
@@ -623,10 +786,8 @@
     }
   });
 
-  /* Set initial history state */
   history.replaceState({ page: 'pageHome' }, '');
 
-  /* Photo upload system */
   function setupUpload(areaId, inputId, previewId, countId, maxPhotos, minPhotos) {
     var files = [];
     var area = document.getElementById(areaId);
@@ -696,6 +857,12 @@
     status.className = 'status-msg';
     status.style.display = 'none';
 
+    if (!document.getElementById('applyConsent').checked) {
+      status.textContent = 'Please agree to the Privacy Policy to continue.';
+      status.className = 'status-msg error';
+      return;
+    }
+
     var data = {
       firstName: document.getElementById('applyFirst').value.trim(),
       lastName: document.getElementById('applyLast').value.trim(),
@@ -708,7 +875,9 @@
       linkedin: document.getElementById('applyLinkedin').value.trim(),
       instagram: document.getElementById('applyInstagram').value.trim(),
       referral: document.getElementById('applyReferral').value.trim(),
-      achievement: document.getElementById('applyAchievement').value.trim()
+      achievement: document.getElementById('applyAchievement').value.trim(),
+      consentGiven: true,
+      consentTimestamp: new Date().toISOString()
     };
 
     if (!data.firstName || !data.lastName || !data.email) {
@@ -746,13 +915,22 @@
     status.className = 'status-msg';
     status.style.display = 'none';
 
+    if (!document.getElementById('nomConsent').checked) {
+      status.textContent = 'Please agree to the Privacy Policy to continue.';
+      status.className = 'status-msg error';
+      return;
+    }
+
     var data = {
       nominatorName: document.getElementById('nomYourName').value.trim(),
       nominatorEmail: document.getElementById('nomYourEmail').value.trim(),
       nomineeName: document.getElementById('nomName').value.trim(),
       nomineeEmail: document.getElementById('nomEmail').value.trim(),
       nomineeUni: document.getElementById('nomUni').value,
-      reason: document.getElementById('nomWhy').value.trim()
+      reason: document.getElementById('nomWhy').value.trim(),
+      consentGiven: true,
+      nomineeConsentConfirmed: true,
+      consentTimestamp: new Date().toISOString()
     };
 
     if (!data.nominatorName || !data.nominatorEmail || !data.nomineeName || !data.nomineeEmail) {
