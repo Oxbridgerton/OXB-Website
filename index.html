@@ -4,25 +4,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alma — A private members' community</title>
-<meta name="description" content=A private members' community>
+<title>Alma — "A private members' community"</title>
+<meta name="description" content="A private members' community">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Franklin:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --navy: #0A1628;
     --navy-surface: #0E1D33;
+    --navy-card: #12243E;
     --gold: #B89B5E;
     --gold-light: #CCAF6E;
     --gold-dim: #8A7545;
     --gold-glow: #E8CC5A;
     --ivory: #F0EBE3;
     --cream: #DDD6C8;
-    --muted: #7C8594;
-    --muted-light: #9BA3AF;
-    --text-primary: #E8E4DC;
-    --text-secondary: rgba(232, 228, 220, 0.55);
-    --border: rgba(184, 155, 94, 0.1);
-    --border-hover: rgba(184, 155, 94, 0.25);
+    --muted: #8A919B;
+    --muted-light: #A8AEB6;
+    --text-primary: #F2EFE9;
+    --text-secondary: rgba(242, 239, 233, 0.6);
+    --border: rgba(184, 155, 94, 0.12);
+    --border-hover: rgba(184, 155, 94, 0.28);
+    --green: #5E9E6E;
+    --red: #C46B5E;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,527 +38,451 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    font-size: 16px;
   }
 
   .page { display: none; position: relative; }
   .page.active { display: block; }
 
   .corner-tl, .corner-tr {
-    position: absolute;
-    top: 0;
-    width: 350px;
-    height: 350px;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.75;
+    position: absolute; top: 0; width: 350px; height: 350px;
+    pointer-events: none; z-index: 0; opacity: 0.75;
   }
   .corner-tl { left: 0; }
   .corner-tr { right: 0; transform: scaleX(-1); }
 
   .site-nav {
     padding: 1.4rem 16rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     border-bottom: 1px solid var(--border);
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
   }
 
   .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    cursor: pointer;
+    font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); cursor: pointer;
   }
 
   .nav-back {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    cursor: pointer;
-    background: none;
-    border: 1px solid var(--border);
-    padding: 0.45rem 1.3rem;
-    transition: all 0.3s;
+    font-family: 'Libre Franklin', sans-serif; font-size: 0.68rem; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; background: none; border: 1px solid var(--border);
+    padding: 0.5rem 1.4rem; transition: all 0.3s;
   }
-
   .nav-back:hover { border-color: var(--border-hover); color: var(--gold); }
 
+  /* HOME */
   .home {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 3rem 2rem;
-    background: var(--navy);
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 3rem 2rem; background: var(--navy);
   }
 
   .home-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4rem, 5.5vw, 4.4rem);
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 1.8rem;
-    opacity: 0;
-    animation: fadeIn 0.7s 0.15s forwards;
+    font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+    font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); line-height: 1; margin-bottom: 1.8rem;
+    opacity: 0; animation: fadeIn 0.7s 0.15s forwards;
   }
 
   .home-tagline {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 300;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--cream);
-    margin-bottom: 2.8rem;
-    opacity: 0;
-    animation: fadeIn 0.7s 0.35s forwards;
+    font-family: 'Libre Franklin', sans-serif; font-size: 0.72rem; font-weight: 300;
+    letter-spacing: 0.32em; text-transform: uppercase; color: var(--cream);
+    margin-bottom: 2.8rem; opacity: 0; animation: fadeIn 0.7s 0.35s forwards;
   }
 
   .home-desc {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    max-width: 420px;
-    margin-bottom: 0.4rem;
-    opacity: 0;
-    animation: fadeIn 0.7s 0.5s forwards;
+    font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 400;
+    font-style: italic; color: var(--text-secondary); line-height: 1.7;
+    max-width: 480px; margin-bottom: 0.4rem;
+    opacity: 0; animation: fadeIn 0.7s 0.5s forwards;
   }
 
   .home-desc-2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    max-width: 420px;
-    margin-bottom: 3.5rem;
-    opacity: 0;
-    animation: fadeIn 0.7s 0.6s forwards;
+    font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 400;
+    font-style: italic; color: var(--text-secondary); line-height: 1.7;
+    max-width: 480px; margin-bottom: 3.5rem;
+    opacity: 0; animation: fadeIn 0.7s 0.6s forwards;
   }
 
   .home-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    opacity: 0;
-    animation: fadeIn 0.7s 0.75s forwards;
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeIn 0.7s 0.75s forwards;
   }
 
   .btn-primary {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 400;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--navy);
-    background: var(--gold);
-    padding: 0.85rem 2.2rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
+    font-family: 'Libre Franklin', sans-serif; font-size: 0.66rem; font-weight: 400;
+    letter-spacing: 0.26em; text-transform: uppercase; color: var(--navy);
+    background: var(--gold); padding: 0.9rem 2.4rem; border: none;
+    cursor: pointer; transition: all 0.3s;
   }
-
-  .btn-primary:hover {
-    background: var(--gold-light);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(184, 155, 94, 0.2);
-  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(184,155,94,0.2); }
 
   .btn-outline {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 400;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: none;
-    padding: 0.85rem 2.2rem;
-    border: 1px solid rgba(184, 155, 94, 0.35);
-    cursor: pointer;
-    transition: all 0.3s;
+    font-family: 'Libre Franklin', sans-serif; font-size: 0.66rem; font-weight: 400;
+    letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold);
+    background: none; padding: 0.9rem 2.4rem; border: 1px solid rgba(184,155,94,0.35);
+    cursor: pointer; transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(184,155,94,0.08); transform: translateY(-1px); }
+
+  .home-bottom-links {
+    display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+    margin-top: 4rem; opacity: 0; animation: fadeIn 0.7s 1s forwards;
   }
 
-  .btn-outline:hover {
-    border-color: var(--gold);
-    background: rgba(184, 155, 94, 0.08);
-    transform: translateY(-1px);
+  .home-link-btn {
+    font-family: 'Libre Franklin', sans-serif; font-size: 0.6rem; font-weight: 300;
+    letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted);
+    background: none; border: none; cursor: pointer; transition: color 0.3s; padding: 0.5rem;
   }
-
-  .home-calendar-link {
-    opacity: 0;
-    animation: fadeIn 0.7s 1s forwards;
-    margin-top: 5rem;
-  }
-
-  .calendar-link-btn {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.55rem;
-    font-weight: 300;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: color 0.3s;
-    padding: 0.5rem;
-  }
-
-  .calendar-link-btn:hover { color: var(--gold); }
-
-  .calendar-link-btn .arrow-down {
-    display: block;
-    margin: 0.6rem auto 0;
-    width: 8px;
-    height: 8px;
-    border-right: 1px solid var(--muted);
-    border-bottom: 1px solid var(--muted);
-    transform: rotate(45deg);
-    opacity: 0.5;
-  }
+  .home-link-btn:hover { color: var(--gold); }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* PAGE HEADERS */
   .page-header { text-align: center; padding: 3.5rem 2rem 0.5rem; }
 
   .page-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 400;
-    color: var(--gold);
-    letter-spacing: 0.04em;
-    margin-bottom: 0.8rem;
+    font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4vw, 2.5rem);
+    font-weight: 400; color: var(--gold); letter-spacing: 0.04em; margin-bottom: 0.8rem;
   }
 
   .page-subtitle {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--text-secondary);
-    max-width: 460px;
-    margin: 0 auto;
-    line-height: 1.6;
+    font-family: 'Playfair Display', serif; font-size: 1.08rem; font-weight: 400;
+    font-style: italic; color: var(--text-secondary); max-width: 480px;
+    margin: 0 auto; line-height: 1.6;
   }
 
   .divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1.8rem 0;
-    max-width: 200px;
-    margin: 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    gap: 1rem; padding: 1.8rem 0; max-width: 200px; margin: 0 auto;
   }
-
   .divider .line { flex: 1; height: 1px; background: var(--border); }
   .divider .dot { width: 4px; height: 4px; background: var(--gold-dim); transform: rotate(45deg); }
 
-  .form-container { max-width: 600px; margin: 0 auto; padding: 0 2rem 5rem; }
-  .form-group { margin-bottom: 1.5rem; }
+  /* FORMS */
+  .form-container { max-width: 620px; margin: 0 auto; padding: 0 2rem 5rem; }
+  .form-group { margin-bottom: 1.6rem; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 
   .form-label {
-    display: block;
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.58rem;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
+    display: block; font-family: 'Libre Franklin', sans-serif; font-size: 0.64rem;
+    font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.5rem;
   }
 
   .form-input, .form-select, .form-textarea {
-    width: 100%;
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 300;
-    padding: 0.7rem 0;
-    background: none;
-    border: none;
-    border-bottom: 1px solid var(--border);
-    color: #FFFFFF;
-    outline: none;
-    transition: border-color 0.3s;
-    -webkit-appearance: none;
-    border-radius: 0;
+    width: 100%; font-family: 'Libre Franklin', sans-serif; font-size: 0.95rem;
+    font-weight: 300; padding: 0.75rem 0; background: none; border: none;
+    border-bottom: 1px solid var(--border); color: #FFFFFF;
+    outline: none; transition: border-color 0.3s; -webkit-appearance: none; border-radius: 0;
   }
 
   input[type="date"] { color-scheme: dark; }
-
   .form-input:focus, .form-select:focus, .form-textarea:focus { border-bottom-color: var(--gold); }
-  .form-input::placeholder, .form-textarea::placeholder { color: rgba(124, 133, 148, 0.4); }
+  .form-input::placeholder, .form-textarea::placeholder { color: rgba(138,145,155,0.5); }
 
   .form-select {
     cursor: pointer;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23B89B5E'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0 center;
-    padding-right: 18px;
+    background-repeat: no-repeat; background-position: right 0 center; padding-right: 18px;
   }
 
   .form-select option { font-family: 'Libre Franklin', sans-serif; background: var(--navy-surface); color: var(--text-primary); }
-  .form-textarea { resize: vertical; min-height: 72px; line-height: 1.6; }
+  .form-textarea { resize: vertical; min-height: 76px; line-height: 1.6; }
 
   .form-hint {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 300;
-    color: var(--muted);
-    margin-top: 0.35rem;
+    font-family: 'Libre Franklin', sans-serif; font-size: 0.72rem; font-weight: 300;
+    color: var(--muted); margin-top: 0.4rem;
   }
 
   .form-submit {
-    display: block;
-    width: 100%;
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 400;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--navy);
-    background: var(--gold);
-    padding: 1rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 2.5rem;
+    display: block; width: 100%; font-family: 'Libre Franklin', sans-serif;
+    font-size: 0.66rem; font-weight: 400; letter-spacing: 0.26em;
+    text-transform: uppercase; color: var(--navy); background: var(--gold);
+    padding: 1.05rem; border: none; cursor: pointer; transition: all 0.3s; margin-top: 2.5rem;
   }
-
-  .form-submit:hover {
-    background: var(--gold-light);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(184, 155, 94, 0.2);
-  }
-
+  .form-submit:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(184,155,94,0.2); }
   .form-submit:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
 
-  .upload-area {
-    border: 1px dashed rgba(184, 155, 94, 0.2);
-    padding: 1.6rem;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.3s;
-  }
-
+  .upload-area { border: 1px dashed rgba(184,155,94,0.2); padding: 1.6rem; text-align: center; cursor: pointer; transition: border-color 0.3s; }
   .upload-area:hover { border-color: var(--gold-dim); }
-  .upload-main-text { font-family: 'Libre Franklin', sans-serif; font-size: 0.8rem; font-weight: 300; color: var(--muted-light); }
-  .upload-sub-text { font-family: 'Libre Franklin', sans-serif; font-size: 0.62rem; font-weight: 300; color: rgba(124, 133, 148, 0.4); margin-top: 0.35rem; }
+  .upload-main-text { font-family: 'Libre Franklin', sans-serif; font-size: 0.85rem; font-weight: 300; color: var(--muted-light); }
+  .upload-sub-text { font-family: 'Libre Franklin', sans-serif; font-size: 0.68rem; font-weight: 300; color: rgba(138,145,155,0.45); margin-top: 0.4rem; }
 
   .photo-preview { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.8rem; }
   .photo-thumb { position: relative; width: 64px; height: 64px; }
   .photo-thumb img { width: 64px; height: 64px; object-fit: cover; border: 1px solid var(--border); }
   .photo-remove { position: absolute; top: -5px; right: -5px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); color: var(--navy); border: none; cursor: pointer; font-size: 10px; line-height: 16px; text-align: center; padding: 0; }
 
-  .form-section-label { font-family: 'Libre Franklin', sans-serif; font-size: 0.58rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dim); text-align: center; margin-bottom: 1.8rem; }
+  .form-section-label { font-family: 'Libre Franklin', sans-serif; font-size: 0.64rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); text-align: center; margin-bottom: 1.8rem; }
   .form-divider { height: 1px; background: var(--border); margin: 2rem 0; }
-
-  .other-uni-box {
-    display: none;
-    margin-top: 0.5rem;
-  }
-
+  .other-uni-box { display: none; margin-top: 0.5rem; }
   .other-uni-box.visible { display: block; }
 
-  .consent-group {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    margin-top: 2rem;
-  }
-
+  .consent-group { display: flex; align-items: flex-start; gap: 0.6rem; margin-top: 2rem; }
   .consent-group input[type="checkbox"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    min-width: 16px;
-    border: 1px solid var(--border-hover);
-    background: none;
-    cursor: pointer;
-    margin-top: 2px;
-    position: relative;
+    -webkit-appearance: none; appearance: none; width: 16px; height: 16px; min-width: 16px;
+    border: 1px solid var(--border-hover); background: none; cursor: pointer; margin-top: 2px; position: relative;
   }
-
-  .consent-group input[type="checkbox"]:checked {
-    background: var(--gold);
-    border-color: var(--gold);
-  }
-
+  .consent-group input[type="checkbox"]:checked { background: var(--gold); border-color: var(--gold); }
   .consent-group input[type="checkbox"]:checked::after {
-    content: '';
-    position: absolute;
-    left: 4px;
-    top: 1px;
-    width: 4px;
-    height: 8px;
-    border: solid var(--navy);
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
+    content: ''; position: absolute; left: 4px; top: 1px; width: 4px; height: 8px;
+    border: solid var(--navy); border-width: 0 2px 2px 0; transform: rotate(45deg);
   }
-
-  .consent-label {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 300;
-    color: var(--muted-light);
-    line-height: 1.6;
-  }
-
-  .consent-label a {
-    color: var(--gold);
-    text-decoration: none;
-    transition: color 0.2s;
-    cursor: pointer;
-  }
-
+  .consent-label { font-family: 'Libre Franklin', sans-serif; font-size: 0.76rem; font-weight: 300; color: var(--muted-light); line-height: 1.6; }
+  .consent-label a { color: var(--gold); text-decoration: none; cursor: pointer; transition: color 0.2s; }
   .consent-label a:hover { color: var(--gold-light); }
 
-  .confirmation-content { text-align: center; padding: 8rem 2rem; max-width: 500px; margin: 0 auto; }
+  /* CONFIRMATION */
+  .confirmation-content { text-align: center; padding: 8rem 2rem; max-width: 520px; margin: 0 auto; }
   .conf-icon { width: 44px; height: 44px; margin: 0 auto 2rem; }
-  .conf-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--gold); margin-bottom: 1.2rem; }
-  .conf-text { font-family: 'Libre Franklin', sans-serif; font-size: 0.85rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); margin-bottom: 2.5rem; }
-
-  .conf-home-btn {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.58rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: none;
-    border: 1px solid var(--border);
-    padding: 0.6rem 1.8rem;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-
+  .conf-title { font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 400; color: var(--gold); margin-bottom: 1.2rem; }
+  .conf-text { font-family: 'Libre Franklin', sans-serif; font-size: 0.92rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); margin-bottom: 2.5rem; }
+  .conf-home-btn { font-family: 'Libre Franklin', sans-serif; font-size: 0.64rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); background: none; border: 1px solid var(--border); padding: 0.65rem 1.8rem; cursor: pointer; transition: all 0.3s; }
   .conf-home-btn:hover { border-color: var(--border-hover); color: var(--gold); }
 
+  /* EVENTS CALENDAR (public) */
   .events-grid {
-    max-width: 1020px;
-    margin: 0 auto;
-    padding: 0 2rem 5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-    gap: 1.2rem;
+    max-width: 1020px; margin: 0 auto; padding: 0 2rem 5rem;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.2rem;
   }
-
-  .event-card {
-    border: 1px solid var(--border);
-    padding: 2rem 1.6rem;
-    transition: all 0.3s;
-    background: var(--navy-surface);
-  }
-
+  .event-card { border: 1px solid var(--border); padding: 2rem 1.6rem; transition: all 0.3s; background: var(--navy-surface); }
   .event-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
-  .event-card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 500; color: var(--cream); margin-bottom: 0.6rem; }
-  .event-card p { font-family: 'Libre Franklin', sans-serif; font-size: 0.78rem; font-weight: 300; line-height: 1.7; color: var(--text-secondary); }
+  .event-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 500; color: var(--cream); margin-bottom: 0.6rem; }
+  .event-card p { font-family: 'Libre Franklin', sans-serif; font-size: 0.84rem; font-weight: 300; line-height: 1.7; color: var(--text-secondary); }
 
+  /* LOGIN */
+  .login-container { max-width: 380px; margin: 0 auto; padding: 0 2rem 5rem; }
+  .login-container .form-submit { margin-top: 1.5rem; }
+  .login-forgot { font-family: 'Libre Franklin', sans-serif; font-size: 0.68rem; font-weight: 300; color: var(--muted); text-align: center; margin-top: 1rem; cursor: pointer; transition: color 0.2s; }
+  .login-forgot:hover { color: var(--gold); }
+
+  /* ACCOUNT SETUP */
+  .setup-container { max-width: 440px; margin: 0 auto; padding: 0 2rem 5rem; }
+
+  /* PAYMENT SELECTION */
+  .plans-container { max-width: 800px; margin: 0 auto; padding: 0 2rem 5rem; }
+  .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+  .plan-card {
+    border: 1px solid var(--border); padding: 2.2rem 1.6rem; text-align: center;
+    transition: all 0.3s; background: var(--navy-surface); cursor: pointer;
+  }
+  .plan-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .plan-card.popular { border-color: var(--gold-dim); }
+  .plan-card.popular::after { content: 'BEST VALUE'; display: block; font-family: 'Libre Franklin', sans-serif; font-size: 0.52rem; font-weight: 400; letter-spacing: 0.2em; color: var(--gold); margin-top: 1.2rem; }
+  .plan-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 500; color: var(--cream); margin-bottom: 0.6rem; }
+  .plan-price { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--gold); margin-bottom: 0.3rem; }
+  .plan-period { font-family: 'Libre Franklin', sans-serif; font-size: 0.72rem; font-weight: 300; color: var(--muted); margin-bottom: 0.4rem; }
+  .plan-saving { font-family: 'Libre Franklin', sans-serif; font-size: 0.68rem; font-weight: 300; color: var(--green); }
+  .plan-btn {
+    display: block; width: 100%; font-family: 'Libre Franklin', sans-serif; font-size: 0.62rem;
+    font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy);
+    background: var(--gold); padding: 0.85rem; border: none; cursor: pointer;
+    transition: all 0.3s; margin-top: 1.5rem;
+  }
+  .plan-btn:hover { background: var(--gold-light); }
+
+  /* MEMBERS EVENTS */
+  .members-container { max-width: 900px; margin: 0 auto; padding: 0 2rem 5rem; }
+  .members-section-title {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400;
+    color: var(--gold); margin-bottom: 1.2rem; margin-top: 2.5rem;
+  }
+  .members-section-title:first-child { margin-top: 0; }
+
+  .member-event-card {
+    border: 1px solid var(--border); padding: 1.4rem 1.6rem; margin-bottom: 0.8rem;
+    background: var(--navy-surface); display: flex; justify-content: space-between;
+    align-items: center; transition: all 0.2s; flex-wrap: wrap; gap: 0.8rem;
+  }
+  .member-event-card:hover { border-color: var(--border-hover); }
+  .member-event-info h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 500; color: var(--cream); margin-bottom: 0.25rem; }
+  .member-event-info p { font-family: 'Libre Franklin', sans-serif; font-size: 0.78rem; font-weight: 300; color: var(--text-secondary); }
+  .member-event-date { font-family: 'Libre Franklin', sans-serif; font-size: 0.68rem; font-weight: 400; color: var(--gold-dim); letter-spacing: 0.08em; margin-top: 0.2rem; }
+  .member-event-price { font-family: 'Libre Franklin', sans-serif; font-size: 0.78rem; font-weight: 400; color: var(--gold); margin-top: 0.2rem; }
+
+  .event-action-btn {
+    font-family: 'Libre Franklin', sans-serif; font-size: 0.58rem; font-weight: 400;
+    letter-spacing: 0.18em; text-transform: uppercase; padding: 0.55rem 1.4rem;
+    border: none; cursor: pointer; transition: all 0.3s; white-space: nowrap;
+  }
+  .event-action-btn.rsvp { color: var(--navy); background: var(--gold); }
+  .event-action-btn.rsvp:hover { background: var(--gold-light); }
+  .event-action-btn.rsvpd { color: var(--green); background: none; border: 1px solid rgba(94,158,110,0.3); cursor: default; }
+  .event-action-btn.pay { color: var(--navy); background: var(--gold); }
+  .event-action-btn.pay:hover { background: var(--gold-light); }
+  .event-action-btn.cancel { color: var(--red); background: none; border: 1px solid rgba(196,107,94,0.25); font-size: 0.54rem; }
+  .event-action-btn.cancel:hover { border-color: var(--red); }
+
+  .no-events { font-family: 'Libre Franklin', sans-serif; font-size: 0.85rem; font-weight: 300; color: var(--muted); padding: 2rem 0; text-align: center; }
+
+  .members-nav {
+    display: flex; gap: 1rem; align-items: center;
+  }
+
+  .nav-member-btn {
+    font-family: 'Libre Franklin', sans-serif; font-size: 0.58rem; font-weight: 400;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+    background: none; border: 1px solid var(--border); padding: 0.45rem 1rem;
+    cursor: pointer; transition: all 0.3s;
+  }
+  .nav-member-btn:hover { border-color: var(--border-hover); color: var(--gold); }
+
+  /* FOOTER */
   .site-footer { padding: 2.5rem 2rem; text-align: center; border-top: 1px solid var(--border); }
-  .footer-text { font-family: 'Libre Franklin', sans-serif; font-size: 0.55rem; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(124, 133, 148, 0.3); }
-  .footer-link { color: rgba(124, 133, 148, 0.3); text-decoration: none; transition: color 0.2s; cursor: pointer; }
+  .footer-text { font-family: 'Libre Franklin', sans-serif; font-size: 0.6rem; font-weight: 300; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(138,145,155,0.3); }
+  .footer-link { color: rgba(138,145,155,0.3); text-decoration: none; transition: color 0.2s; cursor: pointer; }
   .footer-link:hover { color: var(--gold); }
 
-  .status-msg { font-family: 'Libre Franklin', sans-serif; font-size: 0.75rem; font-weight: 300; text-align: center; padding: 0.6rem; margin-top: 1rem; display: none; }
-  .status-msg.error { display: block; color: #D4756A; }
+  .status-msg { font-family: 'Libre Franklin', sans-serif; font-size: 0.8rem; font-weight: 300; text-align: center; padding: 0.6rem; margin-top: 1rem; display: none; }
+  .status-msg.error { display: block; color: var(--red); }
+  .status-msg.success { display: block; color: var(--green); }
 
-  .policy-content {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 0 2rem 5rem;
-  }
-
-  .policy-content h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--gold);
-    margin-top: 2.5rem;
-    margin-bottom: 0.8rem;
-  }
-
-  .policy-content p {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--text-secondary);
-    margin-bottom: 0.8rem;
-  }
-
-  .policy-content ul {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--text-secondary);
-    margin-bottom: 0.8rem;
-    padding-left: 1.2rem;
-  }
-
+  /* PRIVACY POLICY */
+  .policy-content { max-width: 640px; margin: 0 auto; padding: 0 2rem 5rem; }
+  .policy-content h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 500; color: var(--gold); margin-top: 2.5rem; margin-bottom: 0.8rem; }
+  .policy-content p { font-family: 'Libre Franklin', sans-serif; font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); margin-bottom: 0.8rem; }
+  .policy-content ul { font-family: 'Libre Franklin', sans-serif; font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-secondary); margin-bottom: 0.8rem; padding-left: 1.2rem; }
   .policy-content li { margin-bottom: 0.3rem; }
   .policy-content a { color: var(--gold); text-decoration: none; }
   .policy-content a:hover { color: var(--gold-light); }
 
   @media (max-width: 768px) {
     .site-nav { padding: 1rem 1.5rem; }
-    .nav-logo { font-size: 0.85rem; }
+    .nav-logo { font-size: 0.9rem; }
     .home { padding: 4rem 1.5rem; }
     .home-logo { letter-spacing: 0.12em; }
     .form-row { grid-template-columns: 1fr; gap: 1rem; }
     .events-grid { grid-template-columns: 1fr; padding: 0 1.5rem 4rem; }
     .page-header { padding: 2.5rem 1.5rem 0.5rem; }
-    .form-container { padding: 0 1.5rem 4rem; }
+    .form-container, .login-container, .setup-container, .plans-container, .members-container { padding: 0 1.5rem 4rem; }
     .home-buttons { flex-direction: column; align-items: center; }
-    .btn-primary, .btn-outline { width: 200px; text-align: center; }
+    .btn-primary, .btn-outline { width: 220px; text-align: center; }
     .corner-tl, .corner-tr { width: 180px; height: 180px; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .member-event-card { flex-direction: column; align-items: flex-start; }
+    .members-nav { flex-wrap: wrap; }
   }
 </style>
 </head>
 <body>
 
-<!-- HOME -->
+<!-- ═══ HOME ═══ -->
 <div class="page active" id="pageHome">
   <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <div class="home">
     <h1 class="home-logo">ALMA</h1>
-    <p class="home-tagline">"Like Raya for overachievers"</p>
+    <p class="home-tagline">"Like Raya for Overachievers"</p>
     <p class="home-desc">A private members' community.</p>
     <p class="home-desc-2">Rediscover connections you once made effortlessly.</p>
     <div class="home-buttons">
       <button class="btn-primary" onclick="showPage('pageApply')">Request Membership</button>
       <button class="btn-outline" onclick="showPage('pageNominate')">Nominations</button>
     </div>
-    <div class="home-calendar-link">
-      <button class="calendar-link-btn" onclick="showPage('pageEvents')">Events Calendar<span class="arrow-down"></span></button>
+    <div class="home-bottom-links">
+      <button class="home-link-btn" onclick="showPage('pageEvents')">Events Calendar</button>
+      <button class="home-link-btn" onclick="showPage('pageLogin')">Member Login</button>
     </div>
   </div>
 </div>
 
-<!-- APPLY -->
+<!-- ═══ LOGIN ═══ -->
+<div class="page" id="pageLogin">
+  <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
+  <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Alma</div><button class="nav-back" onclick="showPage('pageHome')">Back</button></nav>
+  <div class="page-header"><h2 class="page-title">Member Login</h2></div>
+  <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+  <div class="login-container">
+    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="loginEmail" placeholder="—"></div>
+    <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="loginPassword" placeholder="—"></div>
+    <button type="button" class="form-submit" id="loginBtn" onclick="handleLogin()">Log In</button>
+    <div class="status-msg" id="loginStatus"></div>
+    <p class="login-forgot" onclick="handleForgotPassword()">Forgot your password?</p>
+  </div>
+  <div class="site-footer"><span class="footer-text">Alma · London · Est. 2026</span></div>
+</div>
+
+<!-- ═══ ACCOUNT SETUP ═══ -->
+<div class="page" id="pageSetup">
+  <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
+  <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Alma</div></nav>
+  <div class="page-header"><h2 class="page-title">Welcome to Alma</h2><p class="page-subtitle">Set your password to complete your account setup.</p></div>
+  <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+  <div class="setup-container">
+    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="setupEmail" placeholder="—"></div>
+    <div class="form-group"><label class="form-label">Create Password</label><input type="password" class="form-input" id="setupPassword" placeholder="Minimum 8 characters"></div>
+    <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" class="form-input" id="setupPasswordConfirm" placeholder="—"></div>
+    <button type="button" class="form-submit" id="setupBtn" onclick="handleSetup()">Set Password &amp; Continue</button>
+    <div class="status-msg" id="setupStatus"></div>
+  </div>
+  <div class="site-footer"><span class="footer-text">Alma · London · Est. 2026</span></div>
+</div>
+
+<!-- ═══ PAYMENT / SUBSCRIPTION ═══ -->
+<div class="page" id="pagePayment">
+  <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
+  <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Alma</div></nav>
+  <div class="page-header"><h2 class="page-title">Choose Your Membership</h2><p class="page-subtitle">Select a plan to unlock the full Alma experience.</p></div>
+  <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+  <div class="plans-container">
+    <div class="plans-grid">
+      <div class="plan-card" onclick="handleSubscribe('monthly')">
+        <div class="plan-name">Monthly</div>
+        <div class="plan-price">£16</div>
+        <div class="plan-period">per month</div>
+        <button class="plan-btn">Select</button>
+      </div>
+      <div class="plan-card popular" onclick="handleSubscribe('biannual')">
+        <div class="plan-name">6 Months</div>
+        <div class="plan-price">£79</div>
+        <div class="plan-period">every 6 months</div>
+        <div class="plan-saving">Save £17</div>
+        <button class="plan-btn">Select</button>
+      </div>
+      <div class="plan-card" onclick="handleSubscribe('annual')">
+        <div class="plan-name">Annual</div>
+        <div class="plan-price">£160</div>
+        <div class="plan-period">per year</div>
+        <div class="plan-saving">Save £32</div>
+        <button class="plan-btn">Select</button>
+      </div>
+    </div>
+    <div class="status-msg" id="paymentStatus"></div>
+  </div>
+  <div class="site-footer"><span class="footer-text">Alma · London · Est. 2026</span></div>
+</div>
+
+<!-- ═══ MEMBERS EVENTS ═══ -->
+<div class="page" id="pageMembers">
+  <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
+  <nav class="site-nav">
+    <div class="nav-logo" onclick="showPage('pageHome')">Alma</div>
+    <div class="members-nav">
+      <button class="nav-member-btn" onclick="handleManageSubscription()">Manage Subscription</button>
+      <button class="nav-member-btn" onclick="handleLogout()">Log Out</button>
+    </div>
+  </nav>
+  <div class="page-header"><h2 class="page-title">Events</h2><p class="page-subtitle">Your calendar of experiences.</p></div>
+  <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+  <div class="members-container">
+    <div class="members-section-title">My Upcoming Events</div>
+    <div id="myEventsContainer"><p class="no-events">You haven't signed up for any events yet.</p></div>
+
+    <div class="members-section-title">Weekly &amp; Monthly — Free</div>
+    <div id="freeEventsContainer"><p class="no-events">Loading events...</p></div>
+
+    <div class="members-section-title">Curated Experiences — By Invitation</div>
+    <div id="paidEventsContainer"><p class="no-events">Loading events...</p></div>
+  </div>
+  <div class="site-footer"><span class="footer-text">Alma · London · Est. 2026 · <a class="footer-link" onclick="showPage('pagePrivacy')">Privacy Policy</a></span></div>
+</div>
+
+<!-- ═══ APPLY ═══ -->
 <div class="page" id="pageApply">
   <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Alma</div><button class="nav-back" onclick="showPage('pageHome')">Back</button></nav>
@@ -564,27 +491,17 @@
   <div class="form-container">
     <div class="form-row"><div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" id="applyFirst" placeholder="—"></div><div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" id="applyLast" placeholder="—"></div></div>
     <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="applyEmail" placeholder="—"></div>
-    <div class="form-row"><div class="form-group"><label class="form-label">Date of Birth</label><input type="date" class="form-input" id="applyDOB"></div><div class="form-group"><label class="form-label">Location</label><input type="text" class="form-input" id="applyLocation" placeholder="London"></div></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Date of Birth</label><input type="date" class="form-input" id="applyDOB"></div>
+      <div class="form-group"><label class="form-label">Gender</label><select class="form-select" id="applyGender"><option value="" disabled selected>Select</option><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select></div>
+    </div>
+    <div class="form-group"><label class="form-label">Location</label><input type="text" class="form-input" id="applyLocation" placeholder="London"></div>
     <div class="form-group">
       <label class="form-label">University</label>
       <select class="form-select" id="applyUni" onchange="toggleOtherUni('applyOtherUni', this.value)">
         <option value="" disabled selected>Select your university</option>
-        <optgroup label="United Kingdom">
-          <option value="oxford">University of Oxford</option>
-          <option value="cambridge">University of Cambridge</option>
-        </optgroup>
-        <optgroup label="United States">
-          <option value="harvard">Harvard University</option>
-          <option value="yale">Yale University</option>
-          <option value="princeton">Princeton University</option>
-          <option value="columbia">Columbia University</option>
-          <option value="penn">University of Pennsylvania</option>
-          <option value="brown">Brown University</option>
-          <option value="dartmouth">Dartmouth College</option>
-          <option value="cornell">Cornell University</option>
-          <option value="mit">MIT</option>
-          <option value="stanford">Stanford University</option>
-        </optgroup>
+        <optgroup label="United Kingdom"><option value="oxford">University of Oxford</option><option value="cambridge">University of Cambridge</option></optgroup>
+        <optgroup label="United States"><option value="harvard">Harvard University</option><option value="yale">Yale University</option><option value="princeton">Princeton University</option><option value="columbia">Columbia University</option><option value="penn">University of Pennsylvania</option><option value="brown">Brown University</option><option value="dartmouth">Dartmouth College</option><option value="cornell">Cornell University</option><option value="mit">MIT</option><option value="stanford">Stanford University</option></optgroup>
         <option value="other">Other</option>
       </select>
       <div class="other-uni-box" id="applyOtherUni"><input type="text" class="form-input" id="applyOtherUniText" placeholder="Please specify your university"></div>
@@ -596,19 +513,14 @@
     <div class="form-group"><label class="form-label">Referral Code</label><input type="text" class="form-input" id="applyReferral" placeholder="If you were referred by a member"></div>
     <div class="form-group"><label class="form-label">What is your proudest achievement, or the most interesting thing about you?</label><textarea class="form-textarea" id="applyAchievement" placeholder="—"></textarea></div>
     <div class="form-group"><label class="form-label">Photos (2–5 images)</label><p class="form-hint" style="margin-top:0;margin-bottom:0.7rem;">Upload 2 to 5 photos that capture your lifestyle, personality, and achievements.</p><div class="upload-area" id="applyUploadArea"><input type="file" id="applyPhotoInput" accept="image/*" multiple style="display:none"><p class="upload-main-text">Click to upload or drag photos here</p><p class="upload-sub-text">JPG or PNG · Max 5 photos</p></div><div class="photo-preview" id="applyPhotoPreview"></div><p class="form-hint" id="applyPhotoCount" style="display:none"></p></div>
-
-    <div class="consent-group">
-      <input type="checkbox" id="applyConsent">
-      <label class="consent-label" for="applyConsent">I agree to the <a onclick="showPage('pagePrivacy')">Privacy Policy</a> and consent to my personal data being processed for the purpose of membership consideration.</label>
-    </div>
-
+    <div class="consent-group"><input type="checkbox" id="applyConsent"><label class="consent-label" for="applyConsent">I agree to the <a onclick="showPage('pagePrivacy')">Privacy Policy</a> and consent to my personal data being processed for the purpose of membership consideration.</label></div>
     <button type="button" class="form-submit" id="applySubmitBtn" onclick="submitApply()">Submit Application</button>
     <div class="status-msg" id="applyStatus"></div>
   </div>
   <div class="site-footer"><span class="footer-text">Alma · London · Est. 2026 · <a class="footer-link" onclick="showPage('pagePrivacy')">Privacy Policy</a></span></div>
 </div>
 
-<!-- NOMINATE -->
+<!-- ═══ NOMINATE ═══ -->
 <div class="page" id="pageNominate">
   <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Alma</div><button class="nav-back" onclick="showPage('pageHome')">Back</button></nav>
@@ -620,45 +532,27 @@
     <div class="form-divider"></div>
     <p class="form-section-label">Nominee Details</p>
     <div class="form-row"><div class="form-group"><label class="form-label">Nominee Name</label><input type="text" class="form-input" id="nomName" placeholder="—"></div><div class="form-group"><label class="form-label">Nominee Email</label><input type="email" class="form-input" id="nomEmail" placeholder="—"></div></div>
+    <div class="form-group"><label class="form-label">Nominee Gender</label><select class="form-select" id="nomGender"><option value="" disabled selected>Select</option><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select></div>
     <div class="form-group">
       <label class="form-label">Nominee's University</label>
       <select class="form-select" id="nomUni" onchange="toggleOtherUni('nomOtherUni', this.value)">
         <option value="" disabled selected>Select university</option>
-        <optgroup label="United Kingdom">
-          <option value="oxford">University of Oxford</option>
-          <option value="cambridge">University of Cambridge</option>
-        </optgroup>
-        <optgroup label="United States">
-          <option value="harvard">Harvard University</option>
-          <option value="yale">Yale University</option>
-          <option value="princeton">Princeton University</option>
-          <option value="columbia">Columbia University</option>
-          <option value="penn">University of Pennsylvania</option>
-          <option value="brown">Brown University</option>
-          <option value="dartmouth">Dartmouth College</option>
-          <option value="cornell">Cornell University</option>
-          <option value="mit">MIT</option>
-          <option value="stanford">Stanford University</option>
-        </optgroup>
+        <optgroup label="United Kingdom"><option value="oxford">University of Oxford</option><option value="cambridge">University of Cambridge</option></optgroup>
+        <optgroup label="United States"><option value="harvard">Harvard University</option><option value="yale">Yale University</option><option value="princeton">Princeton University</option><option value="columbia">Columbia University</option><option value="penn">University of Pennsylvania</option><option value="brown">Brown University</option><option value="dartmouth">Dartmouth College</option><option value="cornell">Cornell University</option><option value="mit">MIT</option><option value="stanford">Stanford University</option></optgroup>
         <option value="other">Other</option>
       </select>
       <div class="other-uni-box" id="nomOtherUni"><input type="text" class="form-input" id="nomOtherUniText" placeholder="Please specify university"></div>
     </div>
     <div class="form-group"><label class="form-label">Why are you nominating them?</label><textarea class="form-textarea" id="nomWhy" placeholder="What makes them an exceptional candidate?"></textarea></div>
     <div class="form-group"><label class="form-label">Photos of Nominee (1–3 images)</label><p class="form-hint" style="margin-top:0;margin-bottom:0.7rem;">Upload photos that give us a sense of who they are.</p><div class="upload-area" id="nomUploadArea"><input type="file" id="nomPhotoInput" accept="image/*" multiple style="display:none"><p class="upload-main-text">Click to upload photos</p><p class="upload-sub-text">JPG or PNG · Max 3 photos</p></div><div class="photo-preview" id="nomPhotoPreview"></div><p class="form-hint" id="nomPhotoCount" style="display:none"></p></div>
-
-    <div class="consent-group">
-      <input type="checkbox" id="nomConsent">
-      <label class="consent-label" for="nomConsent">I agree to the <a onclick="showPage('pagePrivacy')">Privacy Policy</a> and confirm I have the nominee's permission to share their personal data for the purpose of membership consideration.</label>
-    </div>
-
+    <div class="consent-group"><input type="checkbox" id="nomConsent"><label class="consent-label" for="nomConsent">I agree to the <a onclick="showPage('pagePrivacy')">Privacy Policy</a> and confirm I have the nominee's permission to share their personal data for the purpose of membership consideration.</label></div>
     <button type="button" class="form-submit" id="nomSubmitBtn" onclick="submitNomination()">Submit Nomination</button>
     <div class="status-msg" id="nomStatus"></div>
   </div>
   <div class="site-footer"><span class="footer-text">Alma · London · Est. 2026 · <a class="footer-link" onclick="showPage('pagePrivacy')">Privacy Policy</a></span></div>
 </div>
 
-<!-- EVENTS -->
+<!-- ═══ EVENTS (public) ═══ -->
 <div class="page" id="pageEvents">
   <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Alma</div><button class="nav-back" onclick="showPage('pageHome')">Back</button></nav>
@@ -675,7 +569,7 @@
   <div class="site-footer"><span class="footer-text">Alma · London · Est. 2026 · <a class="footer-link" onclick="showPage('pagePrivacy')">Privacy Policy</a></span></div>
 </div>
 
-<!-- APPLICATION CONFIRMED -->
+<!-- ═══ APPLICATION CONFIRMED ═══ -->
 <div class="page" id="pageApplyConfirm">
   <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Alma</div></nav>
@@ -687,7 +581,7 @@
   </div>
 </div>
 
-<!-- NOMINATION CONFIRMED -->
+<!-- ═══ NOMINATION CONFIRMED ═══ -->
 <div class="page" id="pageNomConfirm">
   <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Alma</div></nav>
@@ -699,71 +593,48 @@
   </div>
 </div>
 
-<!-- PRIVACY POLICY -->
+<!-- ═══ PRIVACY POLICY ═══ -->
 <div class="page" id="pagePrivacy">
   <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Alma</div><button class="nav-back" onclick="showPage('pageHome')">Back</button></nav>
-  <div class="page-header"><h2 class="page-title">Privacy Policy</h2><p class="page-subtitle">Last updated: March 2026</p></div>
+  <div class="page-header"><h2 class="page-title">Privacy Policy</h2><p class="page-subtitle">Last updated: April 2026</p></div>
   <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
   <div class="policy-content">
     <h3>Who We Are</h3>
     <p>Alma is a private members' community based in London. This policy explains how we collect, use, and protect your personal data in accordance with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.</p>
-
     <h3>Data Controller</h3>
-    <p>Alma is the data controller for the personal data we collect. For any data-related enquiries, please contact us at <a href="mailto:contact@almaldn.com">contact@almaldn.com</a>.</p>
-
+    <p>Alma is the data controller for the personal data we collect. For any data-related enquiries, please contact us at <a href="/cdn-cgi/l/email-protection#c6a5a9a8b2a7a5b286a7aaaba7aaa2a8e8a5a9ab"><span class="__cf_email__" data-cfemail="50333f3e2431332410313c3d313c343e7e333f3d">[email&#160;protected]</span></a>.</p>
     <h3>What Data We Collect</h3>
     <p>When you submit a membership application, we collect:</p>
-    <ul>
-      <li>Name, email address, and date of birth</li>
-      <li>Location</li>
-      <li>University, degree, and professional information</li>
-      <li>LinkedIn profile and Instagram handle (where provided)</li>
-      <li>Referral code (where provided)</li>
-      <li>Free-text responses about your achievements</li>
-      <li>Photographs you upload</li>
-    </ul>
-    <p>When you submit a nomination, we collect your name and email, along with the nominee's name, email, university, a description of why you are nominating them, and any photographs you upload.</p>
-
+    <ul><li>Name, email address, date of birth, and gender</li><li>Location</li><li>University, degree, and professional information</li><li>LinkedIn profile and Instagram handle (where provided)</li><li>Referral code (where provided)</li><li>Free-text responses about your achievements</li><li>Photographs you upload</li></ul>
+    <p>When you submit a nomination, we collect your name and email, along with the nominee's name, email, gender, university, a description of why you are nominating them, and any photographs you upload.</p>
+    <p>When you become a member, we also process payment information through our payment provider Stripe. We do not store your card details directly.</p>
     <h3>Why We Collect It</h3>
-    <p>We process your personal data for the purpose of assessing membership applications and managing our members' community. Our lawful basis for processing is consent, which you provide by ticking the consent checkbox on our application or nomination form.</p>
-
+    <p>We process your personal data for the purpose of assessing membership applications, managing our members' community, and processing membership subscription payments. Our lawful basis for processing is consent, which you provide by ticking the consent checkbox on our application or nomination form. Payment processing is necessary for the performance of our membership contract.</p>
     <h3>How We Store Your Data</h3>
-    <p>Your data is stored securely using Google Firebase (Firestore for text data and Firebase Storage for photographs). Firebase servers are operated by Google and data may be stored in the United States. Google operates under appropriate safeguards for international data transfers, including Standard Contractual Clauses.</p>
-
+    <p>Your data is stored securely using Google Firebase (Firestore for text data and Firebase Storage for photographs). Firebase servers are operated by Google and data may be stored in the United States. Google operates under appropriate safeguards for international data transfers, including Standard Contractual Clauses. Payment data is processed and stored by Stripe in accordance with PCI DSS standards.</p>
     <h3>How Long We Keep Your Data</h3>
-    <p>If your application is successful, we retain your data for the duration of your membership. If your application is unsuccessful, we retain your data for up to 6 months following our decision, after which it is permanently deleted. Nomination data is retained for the same periods.</p>
-
+    <p>If your application is successful, we retain your data for the duration of your membership and for up to 12 months after cancellation. If your application is unsuccessful, we retain your data for up to 6 months following our decision, after which it is permanently deleted. Nomination data is retained for the same periods.</p>
     <h3>Who We Share Your Data With</h3>
-    <p>We do not sell, rent, or share your personal data with any third parties for marketing purposes. Your data is accessible only to the Alma membership committee for the purpose of assessing applications. Our data is hosted on Google Firebase infrastructure.</p>
-
+    <p>We do not sell, rent, or share your personal data with any third parties for marketing purposes. Your data is accessible only to the Alma membership committee for the purpose of assessing applications. Our data is hosted on Google Firebase infrastructure. Payment processing is handled by Stripe.</p>
     <h3>Your Rights</h3>
     <p>Under UK GDPR, you have the right to:</p>
-    <ul>
-      <li>Access the personal data we hold about you</li>
-      <li>Request correction of inaccurate data</li>
-      <li>Request deletion of your data</li>
-      <li>Withdraw your consent at any time</li>
-      <li>Request restriction of processing</li>
-      <li>Data portability — receive your data in a structured format</li>
-      <li>Lodge a complaint with the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank">ico.org.uk</a></li>
-    </ul>
-    <p>To exercise any of these rights, please contact <a href="mailto:contact@almaldn.com">contact@almaldn.com</a>. We will respond within 30 days.</p>
-
+    <ul><li>Access the personal data we hold about you</li><li>Request correction of inaccurate data</li><li>Request deletion of your data</li><li>Withdraw your consent at any time</li><li>Request restriction of processing</li><li>Data portability — receive your data in a structured format</li><li>Lodge a complaint with the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank">ico.org.uk</a></li></ul>
+    <p>To exercise any of these rights, please contact <a href="/cdn-cgi/l/email-protection#01626e6f7560627541606d6c606d656f2f626e6c"><span class="__cf_email__" data-cfemail="43202c2d3722203703222f2e222f272d6d202c2e">[email&#160;protected]</span></a>. We will respond within 30 days.</p>
     <h3>Cookies</h3>
     <p>Our website does not use cookies for tracking or analytics purposes. Firebase may use strictly necessary cookies for service functionality.</p>
-
     <h3>Changes to This Policy</h3>
     <p>We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated date.</p>
   </div>
   <div class="site-footer"><span class="footer-text">Alma · London · Est. 2026</span></div>
 </div>
 
-<!-- FIREBASE -->
-<script type="module">
+<!-- ═══ FIREBASE ═══ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
   import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-storage.js";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 
   var app = initializeApp({
     apiKey: "AIzaSyDVqi_BDN1TdnbcIEieUgbazw9hTv-e4hw",
@@ -776,7 +647,17 @@
 
   var db = getFirestore(app);
   var storage = getStorage(app);
+  var auth = getAuth(app);
 
+  // Expose to global scope
+  window.db = db;
+  window.storage = storage;
+  window.auth = auth;
+  window.firebaseAuth = { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged };
+  window.firebaseFirestore = { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where, serverTimestamp };
+  window.firebaseStorage = { ref, uploadBytes, getDownloadURL };
+
+  // Submit application
   window.firebaseSubmitApplication = async function(data, files) {
     var photoURLs = [], ts = Date.now();
     for (var i = 0; i < files.length; i++) {
@@ -790,6 +671,7 @@
     await addDoc(collection(db, 'applications'), data);
   };
 
+  // Submit nomination
   window.firebaseSubmitNomination = async function(data, files) {
     var photoURLs = [], ts = Date.now();
     for (var i = 0; i < files.length; i++) {
@@ -802,6 +684,73 @@
     data.type = 'nomination';
     await addDoc(collection(db, 'nominations'), data);
   };
+
+  // Load events for members
+  window.loadMemberEvents = async function() {
+    var freeEvents = [], paidEvents = [];
+    try {
+      var snapshot = await getDocs(collection(db, 'events'));
+      snapshot.forEach(function(d) {
+        var ev = d.data();
+        ev._id = d.id;
+        if (ev.type === 'paid') paidEvents.push(ev);
+        else freeEvents.push(ev);
+      });
+    } catch(e) { console.error('Error loading events:', e); }
+
+    // Sort by date
+    var sortByDate = function(a, b) {
+      return (a.date || '').localeCompare(b.date || '');
+    };
+    freeEvents.sort(sortByDate);
+    paidEvents.sort(sortByDate);
+
+    return { free: freeEvents, paid: paidEvents };
+  };
+
+  // RSVP to event
+  window.rsvpEvent = async function(eventId, userEmail) {
+    await addDoc(collection(db, 'rsvps'), {
+      eventId: eventId,
+      email: userEmail,
+      timestamp: serverTimestamp()
+    });
+  };
+
+  // Cancel RSVP
+  window.cancelRsvp = async function(eventId, userEmail) {
+    var q = query(collection(db, 'rsvps'), where('eventId', '==', eventId), where('email', '==', userEmail));
+    var snapshot = await getDocs(q);
+    snapshot.forEach(async function(d) {
+      await deleteDoc(doc(db, 'rsvps', d.id));
+    });
+  };
+
+  // Get user's RSVPs
+  window.getUserRsvps = async function(userEmail) {
+    var rsvps = [];
+    var q = query(collection(db, 'rsvps'), where('email', '==', userEmail));
+    var snapshot = await getDocs(q);
+    snapshot.forEach(function(d) { rsvps.push(d.data().eventId); });
+    return rsvps;
+  };
+
+  // Check if user has active subscription
+  window.checkSubscription = async function(userEmail) {
+    var q = query(collection(db, 'members'), where('email', '==', userEmail));
+    var snapshot = await getDocs(q);
+    var active = false;
+    snapshot.forEach(function(d) {
+      var data = d.data();
+      if (data.subscriptionStatus === 'active') active = true;
+    });
+    return active;
+  };
+
+  // Auth state listener
+  onAuthStateChanged(auth, function(user) {
+    window.currentUser = user;
+  });
 </script>
 
 <script>
@@ -814,32 +763,230 @@
     window.scrollTo(0, 0);
     if (id !== currentPage) { history.pushState({ page: id }, ''); }
     currentPage = id;
+
+    if (id === 'pageMembers') { loadMembersPage(); }
   }
 
   window.addEventListener('popstate', function(e) {
-    if (e.state && e.state.page) {
-      var pages = document.querySelectorAll('.page');
-      for (var i = 0; i < pages.length; i++) { pages[i].classList.remove('active'); }
-      document.getElementById(e.state.page).classList.add('active');
-      window.scrollTo(0, 0);
-      currentPage = e.state.page;
-    } else {
-      var pages = document.querySelectorAll('.page');
-      for (var i = 0; i < pages.length; i++) { pages[i].classList.remove('active'); }
-      document.getElementById('pageHome').classList.add('active');
-      window.scrollTo(0, 0);
-      currentPage = 'pageHome';
-    }
+    var target = (e.state && e.state.page) ? e.state.page : 'pageHome';
+    var pages = document.querySelectorAll('.page');
+    for (var i = 0; i < pages.length; i++) { pages[i].classList.remove('active'); }
+    document.getElementById(target).classList.add('active');
+    window.scrollTo(0, 0);
+    currentPage = target;
   });
 
   history.replaceState({ page: 'pageHome' }, '');
 
   function toggleOtherUni(boxId, value) {
     var box = document.getElementById(boxId);
-    if (value === 'other') { box.classList.add('visible'); }
-    else { box.classList.remove('visible'); }
+    if (value === 'other') { box.classList.add('visible'); } else { box.classList.remove('visible'); }
   }
 
+  // LOGIN
+  function handleLogin() {
+    var btn = document.getElementById('loginBtn');
+    var status = document.getElementById('loginStatus');
+    status.className = 'status-msg'; status.style.display = 'none';
+    var email = document.getElementById('loginEmail').value.trim();
+    var password = document.getElementById('loginPassword').value;
+
+    if (!email || !password) { status.textContent = 'Please enter your email and password.'; status.className = 'status-msg error'; return; }
+
+    btn.disabled = true; btn.textContent = 'Logging in...';
+
+    window.firebaseAuth.signInWithEmailAndPassword(window.auth, email, password).then(function() {
+      // Check subscription
+      return window.checkSubscription(email);
+    }).then(function(active) {
+      btn.disabled = false; btn.textContent = 'Log In';
+      if (active) {
+        showPage('pageMembers');
+      } else {
+        showPage('pagePayment');
+      }
+    }).catch(function(err) {
+      btn.disabled = false; btn.textContent = 'Log In';
+      if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+        status.textContent = 'Invalid email or password.';
+      } else {
+        status.textContent = 'Something went wrong. Please try again.';
+      }
+      status.className = 'status-msg error';
+    });
+  }
+
+  function handleForgotPassword() {
+    var email = document.getElementById('loginEmail').value.trim();
+    var status = document.getElementById('loginStatus');
+    if (!email) { status.textContent = 'Enter your email above, then click forgot password.'; status.className = 'status-msg error'; return; }
+    window.firebaseAuth.sendPasswordResetEmail(window.auth, email).then(function() {
+      status.textContent = 'Password reset email sent. Check your inbox.'; status.className = 'status-msg success';
+    }).catch(function() {
+      status.textContent = 'Could not send reset email. Check the address and try again.'; status.className = 'status-msg error';
+    });
+  }
+
+  // ACCOUNT SETUP
+  function handleSetup() {
+    var btn = document.getElementById('setupBtn');
+    var status = document.getElementById('setupStatus');
+    status.className = 'status-msg'; status.style.display = 'none';
+    var email = document.getElementById('setupEmail').value.trim();
+    var pw = document.getElementById('setupPassword').value;
+    var pwConfirm = document.getElementById('setupPasswordConfirm').value;
+
+    if (!email || !pw) { status.textContent = 'Please fill in all fields.'; status.className = 'status-msg error'; return; }
+    if (pw.length < 8) { status.textContent = 'Password must be at least 8 characters.'; status.className = 'status-msg error'; return; }
+    if (pw !== pwConfirm) { status.textContent = 'Passwords do not match.'; status.className = 'status-msg error'; return; }
+
+    btn.disabled = true; btn.textContent = 'Setting up...';
+
+    window.firebaseAuth.createUserWithEmailAndPassword(window.auth, email, pw).then(function() {
+      btn.disabled = false; btn.textContent = 'Set Password & Continue';
+      showPage('pagePayment');
+    }).catch(function(err) {
+      btn.disabled = false; btn.textContent = 'Set Password & Continue';
+      if (err.code === 'auth/email-already-in-use') {
+        status.textContent = 'An account with this email already exists. Please log in instead.';
+      } else {
+        status.textContent = 'Something went wrong. Please try again.';
+      }
+      status.className = 'status-msg error';
+    });
+  }
+
+  // SUBSCRIPTION - redirects to Stripe Checkout
+  // Replace these URLs with your actual Stripe Payment Links after setup
+  var stripePlans = {
+    monthly: 'https://buy.stripe.com/cNi4gya939c6aTsbHY8g000',
+    biannual: 'https://buy.stripe.com/8x26oGbd7ewq2mWcM28g001',
+    annual: 'https://buy.stripe.com/4gM00igxrdsmgdM27o8g002'
+  };
+
+  function handleSubscribe(plan) {
+    var url = stripePlans[plan];
+    if (url.startsWith('YOUR_')) {
+      var status = document.getElementById('paymentStatus');
+      status.textContent = 'Payment links are being set up. Please try again shortly.';
+      status.className = 'status-msg error';
+      return;
+    }
+    // Append email for Stripe prefill
+    var user = window.currentUser;
+    if (user && user.email) { url += '?prefilled_email=' + encodeURIComponent(user.email); }
+    window.location.href = url;
+  }
+
+  // MANAGE SUBSCRIPTION - redirects to Stripe Customer Portal
+  function handleManageSubscription() {
+    // Replace with your Stripe Customer Portal URL
+    var portalUrl = 'https://billing.stripe.com/p/login/cNi4gya939c6aTsbHY8g000';
+    if (portalUrl.startsWith('YOUR_')) {
+      alert('Subscription management is being set up.');
+      return;
+    }
+    window.location.href = portalUrl;
+  }
+
+  // LOGOUT
+  function handleLogout() {
+    window.firebaseAuth.signOut(window.auth).then(function() {
+      showPage('pageHome');
+    });
+  }
+
+  // MEMBERS PAGE - Load events
+  async function loadMembersPage() {
+    var user = window.currentUser;
+    if (!user) { showPage('pageLogin'); return; }
+
+    var events = await window.loadMemberEvents();
+    var userRsvps = await window.getUserRsvps(user.email);
+
+    // Render free events
+    var freeContainer = document.getElementById('freeEventsContainer');
+    if (events.free.length === 0) {
+      freeContainer.innerHTML = '<p class="no-events">No upcoming free events.</p>';
+    } else {
+      freeContainer.innerHTML = events.free.map(function(ev) {
+        var isRsvpd = userRsvps.indexOf(ev._id) > -1;
+        return '<div class="member-event-card">' +
+          '<div class="member-event-info"><h4>' + esc(ev.name) + '</h4><p>' + esc(ev.description || '') + '</p>' +
+          '<div class="member-event-date">' + esc(ev.date || '') + (ev.time ? ' · ' + esc(ev.time) : '') + '</div>' +
+          (ev.location ? '<div class="member-event-date">' + esc(ev.location) + '</div>' : '') +
+          '</div>' +
+          (isRsvpd
+            ? '<div style="display:flex;gap:0.5rem;align-items:center;"><span class="event-action-btn rsvpd">Signed Up</span><button class="event-action-btn cancel" onclick="handleCancelRsvp(\'' + ev._id + '\')">Cancel</button></div>'
+            : '<button class="event-action-btn rsvp" onclick="handleRsvp(\'' + ev._id + '\')">Sign Up</button>') +
+          '</div>';
+      }).join('');
+    }
+
+    // Render paid events
+    var paidContainer = document.getElementById('paidEventsContainer');
+    if (events.paid.length === 0) {
+      paidContainer.innerHTML = '<p class="no-events">No upcoming curated experiences — check back soon.</p>';
+    } else {
+      paidContainer.innerHTML = events.paid.map(function(ev) {
+        var isRsvpd = userRsvps.indexOf(ev._id) > -1;
+        return '<div class="member-event-card">' +
+          '<div class="member-event-info"><h4>' + esc(ev.name) + '</h4><p>' + esc(ev.description || '') + '</p>' +
+          '<div class="member-event-date">' + esc(ev.date || '') + (ev.time ? ' · ' + esc(ev.time) : '') + '</div>' +
+          (ev.location ? '<div class="member-event-date">' + esc(ev.location) + '</div>' : '') +
+          (ev.price ? '<div class="member-event-price">£' + esc(ev.price) + '</div>' : '') +
+          '</div>' +
+          (isRsvpd
+            ? '<span class="event-action-btn rsvpd">Booked</span>'
+            : (ev.stripeLink
+              ? '<a href="' + esc(ev.stripeLink) + '" target="_blank" class="event-action-btn pay" style="text-decoration:none;">Book · £' + esc(ev.price) + '</a>'
+              : '<span class="event-action-btn rsvpd">Coming Soon</span>')) +
+          '</div>';
+      }).join('');
+    }
+
+    // My events
+    var myContainer = document.getElementById('myEventsContainer');
+    var allEvents = events.free.concat(events.paid);
+    var myEvents = allEvents.filter(function(ev) { return userRsvps.indexOf(ev._id) > -1; });
+    if (myEvents.length === 0) {
+      myContainer.innerHTML = '<p class="no-events">You haven\'t signed up for any events yet.</p>';
+    } else {
+      myContainer.innerHTML = myEvents.map(function(ev) {
+        return '<div class="member-event-card">' +
+          '<div class="member-event-info"><h4>' + esc(ev.name) + '</h4>' +
+          '<div class="member-event-date">' + esc(ev.date || '') + (ev.time ? ' · ' + esc(ev.time) : '') + '</div>' +
+          (ev.location ? '<div class="member-event-date">' + esc(ev.location) + '</div>' : '') +
+          '</div>' +
+          '<button class="event-action-btn cancel" onclick="handleCancelRsvp(\'' + ev._id + '\')">Cancel</button>' +
+          '</div>';
+      }).join('');
+    }
+  }
+
+  // RSVP handlers
+  async function handleRsvp(eventId) {
+    var user = window.currentUser;
+    if (!user) return;
+    await window.rsvpEvent(eventId, user.email);
+    loadMembersPage();
+  }
+
+  async function handleCancelRsvp(eventId) {
+    var user = window.currentUser;
+    if (!user) return;
+    await window.cancelRsvp(eventId, user.email);
+    loadMembersPage();
+  }
+
+  function esc(str) {
+    if (!str) return '';
+    var div = document.createElement('div');
+    div.textContent = String(str);
+    return div.innerHTML;
+  }
+
+  // PHOTO UPLOAD
   function setupUpload(areaId, inputId, previewId, countId, maxPhotos, minPhotos) {
     var files = [];
     var area = document.getElementById(areaId);
@@ -850,11 +997,7 @@
     area.addEventListener('click', function() { input.click(); });
     area.addEventListener('dragover', function(e) { e.preventDefault(); area.style.borderColor = '#B89B5E'; });
     area.addEventListener('dragleave', function() { area.style.borderColor = 'rgba(184,155,94,0.2)'; });
-    area.addEventListener('drop', function(e) {
-      e.preventDefault();
-      area.style.borderColor = 'rgba(184,155,94,0.2)';
-      addFiles(e.dataTransfer.files);
-    });
+    area.addEventListener('drop', function(e) { e.preventDefault(); area.style.borderColor = 'rgba(184,155,94,0.2)'; addFiles(e.dataTransfer.files); });
     input.addEventListener('change', function() { addFiles(this.files); this.value = ''; });
 
     function addFiles(newFiles) {
@@ -870,62 +1013,44 @@
       preview.innerHTML = '';
       for (var i = 0; i < files.length; i++) {
         (function(idx) {
-          var wrapper = document.createElement('div');
-          wrapper.className = 'photo-thumb';
-          var img = document.createElement('img');
-          img.src = URL.createObjectURL(files[idx]);
-          var btn = document.createElement('button');
-          btn.className = 'photo-remove';
-          btn.textContent = '\u00D7';
+          var w = document.createElement('div'); w.className = 'photo-thumb';
+          var img = document.createElement('img'); img.src = URL.createObjectURL(files[idx]);
+          var btn = document.createElement('button'); btn.className = 'photo-remove'; btn.textContent = '\u00D7';
           btn.addEventListener('click', function() { files.splice(idx, 1); render(); });
-          wrapper.appendChild(img);
-          wrapper.appendChild(btn);
-          preview.appendChild(wrapper);
+          w.appendChild(img); w.appendChild(btn); preview.appendChild(w);
         })(i);
       }
       if (files.length > 0) {
         counter.style.display = 'block';
         counter.textContent = files.length + ' of ' + maxPhotos + ' photos uploaded';
-        if (files.length < minPhotos) {
-          counter.textContent += ' (minimum ' + minPhotos + ' required)';
-          counter.style.color = '#B89B5E';
-        } else {
-          counter.style.color = '#7C8594';
-        }
-      } else {
-        counter.style.display = 'none';
-      }
+        if (files.length < minPhotos) { counter.textContent += ' (minimum ' + minPhotos + ' required)'; counter.style.color = '#B89B5E'; }
+        else { counter.style.color = '#8A919B'; }
+      } else { counter.style.display = 'none'; }
     }
-
     return { getFiles: function() { return files; } };
   }
 
   var applyPhotos = setupUpload('applyUploadArea', 'applyPhotoInput', 'applyPhotoPreview', 'applyPhotoCount', 5, 2);
   var nomPhotos = setupUpload('nomUploadArea', 'nomPhotoInput', 'nomPhotoPreview', 'nomPhotoCount', 3, 1);
 
+  // SUBMIT APPLICATION
   function submitApply() {
     var btn = document.getElementById('applySubmitBtn');
     var status = document.getElementById('applyStatus');
-    status.className = 'status-msg';
-    status.style.display = 'none';
+    status.className = 'status-msg'; status.style.display = 'none';
 
-    if (!document.getElementById('applyConsent').checked) {
-      status.textContent = 'Please agree to the Privacy Policy to continue.';
-      status.className = 'status-msg error';
-      return;
-    }
+    if (!document.getElementById('applyConsent').checked) { status.textContent = 'Please agree to the Privacy Policy to continue.'; status.className = 'status-msg error'; return; }
 
     var uniValue = document.getElementById('applyUni').value;
     var university = uniValue;
-    if (uniValue === 'other') {
-      university = 'other: ' + document.getElementById('applyOtherUniText').value.trim();
-    }
+    if (uniValue === 'other') { university = 'other: ' + document.getElementById('applyOtherUniText').value.trim(); }
 
     var data = {
       firstName: document.getElementById('applyFirst').value.trim(),
       lastName: document.getElementById('applyLast').value.trim(),
       email: document.getElementById('applyEmail').value.trim(),
       dateOfBirth: document.getElementById('applyDOB').value,
+      gender: document.getElementById('applyGender').value,
       location: document.getElementById('applyLocation').value.trim(),
       university: university,
       degree: document.getElementById('applyDegree').value.trim(),
@@ -938,58 +1063,40 @@
       consentTimestamp: new Date().toISOString()
     };
 
-    if (!data.firstName || !data.lastName || !data.email) {
-      status.textContent = 'Please complete all required fields.';
-      status.className = 'status-msg error';
-      return;
-    }
+    if (!data.firstName || !data.lastName || !data.email) { status.textContent = 'Please complete all required fields.'; status.className = 'status-msg error'; return; }
 
     var photos = applyPhotos.getFiles();
-    if (photos.length < 2) {
-      status.textContent = 'Please upload at least 2 photos.';
-      status.className = 'status-msg error';
-      return;
-    }
+    if (photos.length < 2) { status.textContent = 'Please upload at least 2 photos.'; status.className = 'status-msg error'; return; }
 
-    btn.disabled = true;
-    btn.textContent = 'Submitting...';
+    btn.disabled = true; btn.textContent = 'Submitting...';
 
     window.firebaseSubmitApplication(data, photos).then(function() {
-      btn.disabled = false;
-      btn.textContent = 'Submit Application';
-      showPage('pageApplyConfirm');
+      btn.disabled = false; btn.textContent = 'Submit Application'; showPage('pageApplyConfirm');
     }).catch(function(err) {
       console.error('Submit error:', err);
-      btn.disabled = false;
-      btn.textContent = 'Submit Application';
-      status.textContent = 'Something went wrong. Please try again.';
-      status.className = 'status-msg error';
+      btn.disabled = false; btn.textContent = 'Submit Application';
+      status.textContent = 'Something went wrong. Please try again.'; status.className = 'status-msg error';
     });
   }
 
+  // SUBMIT NOMINATION
   function submitNomination() {
     var btn = document.getElementById('nomSubmitBtn');
     var status = document.getElementById('nomStatus');
-    status.className = 'status-msg';
-    status.style.display = 'none';
+    status.className = 'status-msg'; status.style.display = 'none';
 
-    if (!document.getElementById('nomConsent').checked) {
-      status.textContent = 'Please agree to the Privacy Policy to continue.';
-      status.className = 'status-msg error';
-      return;
-    }
+    if (!document.getElementById('nomConsent').checked) { status.textContent = 'Please agree to the Privacy Policy to continue.'; status.className = 'status-msg error'; return; }
 
     var uniValue = document.getElementById('nomUni').value;
     var nomineeUni = uniValue;
-    if (uniValue === 'other') {
-      nomineeUni = 'other: ' + document.getElementById('nomOtherUniText').value.trim();
-    }
+    if (uniValue === 'other') { nomineeUni = 'other: ' + document.getElementById('nomOtherUniText').value.trim(); }
 
     var data = {
       nominatorName: document.getElementById('nomYourName').value.trim(),
       nominatorEmail: document.getElementById('nomYourEmail').value.trim(),
       nomineeName: document.getElementById('nomName').value.trim(),
       nomineeEmail: document.getElementById('nomEmail').value.trim(),
+      nomineeGender: document.getElementById('nomGender').value,
       nomineeUni: nomineeUni,
       reason: document.getElementById('nomWhy').value.trim(),
       consentGiven: true,
@@ -997,30 +1104,23 @@
       consentTimestamp: new Date().toISOString()
     };
 
-    if (!data.nominatorName || !data.nominatorEmail || !data.nomineeName || !data.nomineeEmail) {
-      status.textContent = 'Please complete all required fields.';
-      status.className = 'status-msg error';
-      return;
-    }
+    if (!data.nominatorName || !data.nominatorEmail || !data.nomineeName || !data.nomineeEmail) { status.textContent = 'Please complete all required fields.'; status.className = 'status-msg error'; return; }
 
-    btn.disabled = true;
-    btn.textContent = 'Submitting...';
-
+    btn.disabled = true; btn.textContent = 'Submitting...';
     var photos = nomPhotos.getFiles();
 
     window.firebaseSubmitNomination(data, photos).then(function() {
-      btn.disabled = false;
-      btn.textContent = 'Submit Nomination';
-      showPage('pageNomConfirm');
+      btn.disabled = false; btn.textContent = 'Submit Nomination'; showPage('pageNomConfirm');
     }).catch(function(err) {
       console.error('Submit error:', err);
-      btn.disabled = false;
-      btn.textContent = 'Submit Nomination';
-      status.textContent = 'Something went wrong. Please try again.';
-      status.className = 'status-msg error';
+      btn.disabled = false; btn.textContent = 'Submit Nomination';
+      status.textContent = 'Something went wrong. Please try again.'; status.className = 'status-msg error';
     });
   }
-</script>
 
-</body>
-</html>
+  // Check URL params for account setup token
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('setup') === 'true') {
+      var email = params.get('email');
+      if (email) { document.getElementById('setupEmail
