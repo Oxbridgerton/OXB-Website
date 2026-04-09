@@ -1123,4 +1123,17 @@
     var params = new URLSearchParams(window.location.search);
     if (params.get('setup') === 'true') {
       var email = params.get('email');
-      if (email) { document.getElementById('setupEmail
+      if (email) { document.getElementById('setupEmail').value = email; }
+      showPage('pageSetup');
+    }
+    if (params.get('payment') === 'success') {
+      setTimeout(function() {
+        if (window.currentUser) { showPage('pageMembers'); }
+        else { showPage('pageLogin'); }
+      }, 1500);
+    }
+  })();
+</script>
+
+</body>
+</html>
