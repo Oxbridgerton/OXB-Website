@@ -666,6 +666,9 @@
   };
 
   window.rsvpEvent = async function(eventId, userEmail) {
+    var q = query(collection(db, 'rsvps'), where('eventId', '==', eventId), where('email', '==', userEmail));
+    var existing = await getDocs(q);
+    if (!existing.empty) return;
     await addDoc(collection(db, 'rsvps'), { eventId: eventId, email: userEmail, timestamp: serverTimestamp() });
   };
 
