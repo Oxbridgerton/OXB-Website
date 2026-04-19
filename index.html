@@ -12,9 +12,9 @@
     --navy: #0A1628;
     --navy-surface: #0E1D33;
     --navy-card: #12243E;
-    --gold: #C9A84C;
-    --gold-light: #D9BC6A;
-    --gold-dim: #9A8340;
+    --gold: #C0A155;
+    --gold-light: #CCAF6E;
+    --gold-dim: #8A7545;
     --gold-glow: #E8CC5A;
     --cream: #E8E0D0;
     --muted: #94999F;
@@ -116,15 +116,15 @@
     background: var(--gold); padding: 0.95rem 2.6rem; border: none;
     cursor: pointer; transition: all 0.3s;
   }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.25); }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(184,155,94,0.25); }
 
   .btn-outline {
     font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 500;
     letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold);
-    background: none; padding: 0.95rem 2.6rem; border: 1px solid rgba(201,168,76,0.4);
+    background: none; padding: 0.95rem 2.6rem; border: 1px solid rgba(184,155,94,0.4);
     cursor: pointer; transition: all 0.3s;
   }
-  .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); transform: translateY(-1px); }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(184,155,94,0.08); transform: translateY(-1px); }
 
   .home-bottom-links {
     display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
@@ -206,10 +206,10 @@
     text-transform: uppercase; color: var(--navy); background: var(--gold);
     padding: 1.1rem; border: none; cursor: pointer; transition: all 0.3s; margin-top: 2.5rem;
   }
-  .form-submit:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.25); }
+  .form-submit:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(184,155,94,0.25); }
   .form-submit:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
 
-  .upload-area { border: 1px dashed rgba(201,168,76,0.22); padding: 1.8rem; text-align: center; cursor: pointer; transition: border-color 0.3s; }
+  .upload-area { border: 1px dashed rgba(184,155,94,0.22); padding: 1.8rem; text-align: center; cursor: pointer; transition: border-color 0.3s; }
   .upload-area:hover { border-color: var(--gold-dim); }
   .upload-main-text { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 400; color: var(--muted-light); }
   .upload-sub-text { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 400; color: rgba(148,153,159,0.45); margin-top: 0.4rem; }
@@ -281,7 +281,7 @@
     border: 1px solid var(--border); padding: 2.4rem 1.8rem; text-align: center;
     transition: all 0.3s; background: var(--navy-surface); cursor: pointer;
   }
-  .plan-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(201,168,76,0.12); }
+  .plan-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(184,155,94,0.12); }
   .plan-card.popular { border-color: var(--gold-dim); }
   .plan-card.popular::after { content: 'BEST VALUE'; display: block; font-family: 'DM Sans', sans-serif; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.2em; color: var(--gold); margin-top: 1.2rem; }
   .plan-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 500; color: var(--cream); margin-bottom: 0.6rem; }
@@ -563,7 +563,7 @@
   <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Alma</div></nav>
   <div class="confirmation-content">
-    <div class="conf-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 2L28 9V16L22 23L16 16V9L22 2Z" stroke="#C9A84C" stroke-width="0.5" fill="none"/><line x1="22" y1="23" x2="22" y2="35" stroke="#C9A84C" stroke-width="0.5"/><path d="M16 30Q22 26 28 30" stroke="#C9A84C" stroke-width="0.5" fill="none"/></svg></div>
+    <div class="conf-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 2L28 9V16L22 23L16 16V9L22 2Z" stroke="#B89B5E" stroke-width="0.5" fill="none"/><line x1="22" y1="23" x2="22" y2="35" stroke="#B89B5E" stroke-width="0.5"/><path d="M16 30Q22 26 28 30" stroke="#B89B5E" stroke-width="0.5" fill="none"/></svg></div>
     <h2 class="conf-title">Application Received</h2>
     <p class="conf-text">Thank you. Your application is now under review by our membership committee. Due to the volume of applications we receive, this process typically takes 2–4 weeks. Referred candidates are reviewed on a priority basis. You'll receive a decision at the email address you provided.</p>
     <button class="conf-home-btn" onclick="showPage('pageHome')">Return Home</button>
@@ -575,7 +575,7 @@
   <img src="corner.png" class="corner-tl" alt=""><img src="corner.png" class="corner-tr" alt="">
   <nav class="site-nav"><div class="nav-logo" onclick="showPage('pageHome')">Alma</div></nav>
   <div class="confirmation-content">
-    <div class="conf-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 2L28 9V16L22 23L16 16V9L22 2Z" stroke="#C9A84C" stroke-width="0.5" fill="none"/><line x1="22" y1="23" x2="22" y2="35" stroke="#C9A84C" stroke-width="0.5"/><path d="M16 30Q22 26 28 30" stroke="#C9A84C" stroke-width="0.5" fill="none"/></svg></div>
+    <div class="conf-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 2L28 9V16L22 23L16 16V9L22 2Z" stroke="#B89B5E" stroke-width="0.5" fill="none"/><line x1="22" y1="23" x2="22" y2="35" stroke="#B89B5E" stroke-width="0.5"/><path d="M16 30Q22 26 28 30" stroke="#B89B5E" stroke-width="0.5" fill="none"/></svg></div>
     <h2 class="conf-title">Nomination Received</h2>
     <p class="conf-text">Thank you for your nomination — nominations carry significant weight in our process. If successful, we'll reach out to your nominee with an invitation.</p>
     <button class="conf-home-btn" onclick="showPage('pageHome')">Return Home</button>
@@ -898,15 +898,15 @@
     var preview = document.getElementById(previewId);
     var counter = document.getElementById(countId);
     area.addEventListener('click', function() { input.click(); });
-    area.addEventListener('dragover', function(e) { e.preventDefault(); area.style.borderColor = '#C9A84C'; });
-    area.addEventListener('dragleave', function() { area.style.borderColor = 'rgba(201,168,76,0.22)'; });
-    area.addEventListener('drop', function(e) { e.preventDefault(); area.style.borderColor = 'rgba(201,168,76,0.22)'; addFiles(e.dataTransfer.files); });
+    area.addEventListener('dragover', function(e) { e.preventDefault(); area.style.borderColor = '#B89B5E'; });
+    area.addEventListener('dragleave', function() { area.style.borderColor = 'rgba(184,155,94,0.22)'; });
+    area.addEventListener('drop', function(e) { e.preventDefault(); area.style.borderColor = 'rgba(184,155,94,0.22)'; addFiles(e.dataTransfer.files); });
     input.addEventListener('change', function() { addFiles(this.files); this.value = ''; });
     function addFiles(newFiles) { for (var i = 0; i < newFiles.length; i++) { if (files.length >= maxPhotos) break; if (!newFiles[i].type.startsWith('image/')) continue; files.push(newFiles[i]); } render(); }
     function render() {
       preview.innerHTML = '';
       for (var i = 0; i < files.length; i++) { (function(idx) { var w = document.createElement('div'); w.className = 'photo-thumb'; var img = document.createElement('img'); img.src = URL.createObjectURL(files[idx]); var btn = document.createElement('button'); btn.className = 'photo-remove'; btn.textContent = '\u00D7'; btn.addEventListener('click', function() { files.splice(idx, 1); render(); }); w.appendChild(img); w.appendChild(btn); preview.appendChild(w); })(i); }
-      if (files.length > 0) { counter.style.display = 'block'; counter.textContent = files.length + ' of ' + maxPhotos + ' photos uploaded'; if (files.length < minPhotos) { counter.textContent += ' (minimum ' + minPhotos + ' required)'; counter.style.color = '#C9A84C'; } else { counter.style.color = '#94999F'; } } else { counter.style.display = 'none'; }
+      if (files.length > 0) { counter.style.display = 'block'; counter.textContent = files.length + ' of ' + maxPhotos + ' photos uploaded'; if (files.length < minPhotos) { counter.textContent += ' (minimum ' + minPhotos + ' required)'; counter.style.color = '#B89B5E'; } else { counter.style.color = '#94999F'; } } else { counter.style.display = 'none'; }
     }
     return { getFiles: function() { return files; } };
   }
