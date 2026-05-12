@@ -751,10 +751,8 @@
     if (!window.firebaseAuth) { status.textContent = 'Still loading. Please wait a moment and try again.'; status.className = 'status-msg error'; return; }
     btn.disabled = true; btn.textContent = 'Logging in...';
     window.firebaseAuth.signInWithEmailAndPassword(window.auth, email, password).then(function() {
-      return window.checkSubscription(email);
-    }).then(function(active) {
       btn.disabled = false; btn.textContent = 'Log In';
-      if (active) { showPage('pageMembers'); } else { showPage('pagePayment'); }
+      showPage('pageMembers');
     }).catch(function(err) {
       btn.disabled = false; btn.textContent = 'Log In';
       status.textContent = (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') ? 'Invalid email or password.' : 'Error: ' + err.message;
@@ -787,7 +785,7 @@
     btn.disabled = true; btn.textContent = 'Setting up...';
     try {
       window.firebaseAuth.createUserWithEmailAndPassword(window.auth, email, pw).then(function() {
-        btn.disabled = false; btn.textContent = 'Set Password & Continue'; showPage('pagePayment');
+        btn.disabled = false; btn.textContent = 'Set Password & Continue'; showPage('pageMembers');
       }).catch(function(err) {
         btn.disabled = false; btn.textContent = 'Set Password & Continue';
         status.textContent = err.code === 'auth/email-already-in-use' ? 'An account with this email already exists. Please log in instead.' : 'Error: ' + err.code + ' - ' + err.message;
